@@ -141,8 +141,6 @@
 
 - **Conclusions**:
   - The program successfully demonstrates the use of OOP principles and design patterns.
-  - Future extensions could include adding more sophisticated AI players, adding multiplayer options over network, or improving the user interface.
-
 - **Future Prospects**:
   - The program could be extended to support more players, additional game modes, or alternative board sizes.
   - Improvements in error handling, game statistics, and user interface could enhance the player experience.
