@@ -1,5 +1,3 @@
-# Report on Tic Tac Toe Game Implementation
-
 ## Introduction
 
 **Goal of the Coursework**: The goal of this coursework is to implement a Tic Tac Toe game in Python, demonstrating a solid understanding of Object-Oriented Programming (OOP) principles and design patterns.
