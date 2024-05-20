@@ -1,30 +1,30 @@
-### Ataskaita apie "Tic Tac Toe" žaidimo įgyvendinimą
+# Report on Tic Tac Toe Game Implementation
 
-#### Įvadas
+## Introduction
 
-**Kursinio darbo tikslas**: Šio kursinio darbo tikslas yra įgyvendinti "Tic Tac Toe" žaidimą naudojant Python programavimo kalbą, demonstruojant tvirtus objektinio programavimo (OOP) principus ir projektavimo šablonus.
+**Goal of the Coursework**: The goal of this coursework is to implement a Tic Tac Toe game in Python, demonstrating a solid understanding of Object-Oriented Programming (OOP) principles and design patterns.
 
-**Programos aprašymas**: "Tic Tac Toe" žaidimo programa leidžia dviem žmonėms žaisti vienas prieš kitą. Programa taip pat apima rezultatų lentelę, kuri seka kiekvieno žaidėjo pergales ir išsaugo šią informaciją JSON failo formatu.
+**Application Description**: The Tic Tac Toe game allows two human players to play against each other. The program includes a scoreboard that tracks wins for each player and saves this data to a JSON file.
 
-**Kaip paleisti programą**:
-1. Nuklonuokite repozitoriją, kurią sudaro kodas.
-2. Užtikrinkite, kad jūsų sistemoje būtų įdiegta Python 3.x versija.
-3. Paleiskite programą įvykdę komandą `python tic_tac_toe.py` terminalo arba komandinėje eilutėje.
-4. Sekite ekrane esančius nurodymus, įveskite žaidėjų vardus ir atlikite žaidimo veiksmus.
+**How to Run the Program**:
+1. Clone the repository containing the code.
+2. Ensure Python 3.x is installed on your system.
+3. Run the program in your preferred Python environment, e.g., in Visual Studio Code by clicking the "Run Python file" button.
 
-**Kaip naudotis programa**:
-- Žaidėjai paeiliui įveda savo žingsnius pasirinkdami numerį, atitinkantį laukelį 3x3 žaidimo lentelėje.
-- Žaidimas tęsiasi, kol žaidėjas laimi, žaidimas baigiasi lygiosiomis arba žaidėjai nusprendžia nebetęsti žaidimo.
 
-### Kūnas/Analizė
+**How to Use the Program**:
+- Players take turns entering their moves by selecting a number corresponding to a position on the 3x3 game board.
+- The game continues until a player wins, the game is drawn, or the players choose not to continue.
 
-**Objektinio programavimo (OOP) principų įgyvendinimas**
+## Body/Analysis
 
-1. **Encapsulation:**
-   - **Apibūdinimas**: Inkapsuliacija yra duomenų (atributų) ir metodų (funkcijų), veikiančių su šiais duomenimis, sujungimas į vieną vienetą (klasę).
-   - **Naudojimas kode**: Tokios klasės kaip `Player`, `Game` ir `ScoreBoard` inkapsuliuoja savo duomenis ir metodus, užtikrinant duomenų vientisumą ir lengvą priežiūrą.
+### Implementation of Object-Oriented Programming (OOP) Pillars
 
-   ```python
+1. **Encapsulation**
+   - **Description**: Encapsulation is the bundling of data (attributes) and methods (functions) that operate on the data into a single unit (class).
+   - **Usage in Code**: Classes such as `Player`, `Game`, and `ScoreBoard` encapsulate their data and methods, ensuring data integrity and ease of maintenance.
+
+   ===python
    class Player:
        def __init__(self, name, symbol):
            self.name = name
@@ -32,81 +32,62 @@
 
        def get_move(self):
            try:
-               move = int(input(f"Žaidėjo {self.name} ({self.symbol}) eilė. Kurią dėžutę pasirinksite? : "))
+               move = int(input(f"Player {self.name} ({self.symbol}) turn. Which box? : "))
                return move
            except ValueError:
-               print("Neteisinga įvestis!!! Bandykite dar kartą.")
+               print("Wrong Input!!! Try Again")
                return self.get_move()
-   ```
+   ===
 
-2. **Abstraction:**
-   - **Apibūdinimas**: Abstrakcija apima vidinės įgyvendinimo detalės slėpimą ir rodo tik objekto būtiniausias savybes.
-   - **Naudojimas kode**: `Player` klasė abstrahuoja proceso, kaip gauti žaidėjo ėjimą, supaprastindama sąveiką su žaidimu.
+2. **Abstraction**
+   - **Description**: Abstraction refers to the concept of hiding internal implementation details and showing only the necessary features of an object.
+   - **Usage in Code**: The `Player` class abstracts the process of getting a move from the user, simplifying the interaction with the game.
 
-   ```python
+   ===python
    class Player:
        def get_move(self):
            try:
-               move = int(input(f"Žaidėjo {self.name} ({self.symbol}) eilė. Kurią dėžutę pasirinksite? : "))
+               move = int(input(f"Player {self.name} ({self.symbol}) turn. Which box? : "))
                return move
            except ValueError:
-               print("Neteisinga įvestis!!! Bandykite dar kartą.")
+               print("Wrong Input!!! Try Again")
                return self.get_move()
-   ```
+   ===
 
-3. **Inheritance:**
-   - **Apibūdinimas**: Paveldėjimas yra mechanizmas, leidžiantis vienai klasei (vaikinei klasei) įgauti savybes ir elgesį iš kitos (tėvinės) klasės.
-   - **Naudojimas kode**: `HumanPlayer` klasė paveldi `Player` klasės atributus ir metodus.
+3. **Inheritance**
+   - **Description**: Inheritance is the mechanism by which one class (child class) acquires the properties and behaviors of another class (parent class).
+   - **Usage in Code**: The `HumanPlayer` class inherits from the `Player` class, inheriting its attributes and methods.
 
-   ```python
+   ===python
    class HumanPlayer(Player):
        pass
-   ```
+   ===
 
-4. **Polymorphism:**
-   - **Apibūdinimas**: Polimorfizmas leidžia skirtingų klasių objektams būti traktuojamiems kaip bendros tėvinės klasės objektai.
-   - **Naudojimas kode**: Tie patys `Player` ir `HumanPlayer` klasės turi `get_move()` metodą, leidžiantį juos panaudoti keičiamai `Game` klasėje.
+4. **Polymorphism**
+   - **Description**: Polymorphism allows objects of different classes to be treated as objects of a common superclass.
+   - **Usage in Code**: Both `Player` and `HumanPlayer` classes have the `get_move()` method, allowing them to be used interchangeably in the `Game` class.
 
-   ```python
+   ===python
    class Player:
        def get_move(self):
            try:
-               move = int(input(f"Žaidėjo {self.name} ({self.symbol}) eilė. Kurią dėžutę pasirinksite? : "))
+               move = int(input(f"Player {self.name} ({self.symbol}) turn. Which box? : "))
                return move
            except ValueError:
-               print("Neteisinga įvestis!!! Bandykite dar kartą.")
+               print("Wrong Input!!! Try Again")
                return self.get_move()
 
    class HumanPlayer(Player):
        pass
-   ```
+   ===
 
-5. **Uždarumas**
-   - **Apibūdinimas**: Uždarumas apibrėžia, kad klasės nariai (atributai ir metodai) yra pasiekiami tik iš tos pačios klasės arba iš jos pakopų, ne iš išorinės programos.
-   - **Naudojimas kode**: Klasėse, pavyzdžiui, `Player`, `Game`, `ScoreBoard`, užtikrinamas uždarumas, apsaugant vidinius duomenis nuo tiesioginio prieigos iš išorės.
+### Design Patterns Used
 
-   ```python
-   class Player:
-       def __init__(self, name, symbol):
-           self.name = name
-           self.symbol = symbol
-           self.__score = 0  # private attribute
+1. **Singleton Pattern**
+   - **Description**: Ensures a class has only one instance and provides a global point of access to that instance.
+   - **Usage in Code**: The `ScoreBoard` class uses the Singleton Pattern to ensure there is only one scoreboard instance throughout the program.
 
-       def increment_score(self):
-           self.__score += 1
-
-       def get_score(self):
-           return self.__score
-   ```
-
-    ```
-### Naudoti projektavimo šablonai
-
-1. **Singletono šablonas**
-   - **Apibūdinimas**: Užtikrina, kad klasė turėtų tik vieną egzempliorių ir suteikia globalų prieigą prie to egzemplioriaus.
-   - **Naudojimas kode**: `ScoreBoard` klasė naudoja Singletono šabloną, kad užtikrintų, jog visoje programoje egzistuos tik vienas rezultatų lenta.
-
-   ```python
+   ===python
    class ScoreBoard:
        _instance = None
 
@@ -115,13 +96,13 @@
                cls._instance = super(ScoreBoard, cls).__new__(cls)
                cls._instance.scores = {}
            return cls._instance
-   ```
+   ===
 
-2. **Fabriko metodo šablonas**
-   - **Apibūdinimas**: Suteikia sąsają kurti objektus, bet leidžia vaikinėms klasėms keisti objektų tipą, kurie bus sukurti.
-   - **Naudojimas kode**: `GameFactory` klasė yra Fabriko metodo šablonas, kuris kuria `Game` objektus su skirtingais žaidėjais.
+2. **Factory Method Pattern**
+   - **Description**: Provides an interface for creating objects, but allows subclasses to alter the type of objects that will be created.
+   - **Usage in Code**: The `GameFactory` class is a Factory Method Pattern that creates instances of `Game` with different players.
 
-   ```python
+   ===python
    class GameFactory:
        @staticmethod
        def create_game(player1_name, player2_name):
@@ -129,49 +110,45 @@
            game.add_player(HumanPlayer(player1_name, 'X'))
            game.add_player(HumanPlayer(player2_name, 'O'))
            return game
-   ```
-  ### Failo operacijos (Skaitymas iš failo ir rašymas į failą)
+   ===
 
-**Naudojimas kode**: Programa išsaugo rezultatų lentelės duomenis į JSON failą (`scoreboard.json`) ir juos įkelia paleidus programą.
+### File Operations (Reading from and Writing to File)
 
-```python
-class ScoreBoard:
-    # ...
+- **Usage in Code**: The program saves scoreboard data to a JSON file (`scoreboard.json`) and loads it when the program starts.
 
-    def save_to_file(self, filename='scoreboard.json'):
-        with open(filename, 'w') as f:
-            json.dump(self.scores, f)
+   ===python
+   class ScoreBoard:
+       # ...
 
-    def load_from_file(self, filename='scoreboard.json'):
-        try:
-            with open(filename, 'r') as f:
-                self.scores = json.load(f)
-        except FileNotFoundError:
-            self.scores = {}
-```
+       def save_to_file(self, filename='scoreboard.json'):
+           with open(filename, 'w') as f:
+               json.dump(self.scores, f)
 
-### Rezultatai ir Santrauka
+       def load_from_file(self, filename='scoreboard.json'):
+           try:
+               with open(filename, 'r') as f:
+                   self.scores = json.load(f)
+           except FileNotFoundError:
+               self.scores = {}
+   ===
 
-**Rezultatai**:
+## Results and Summary
 
-- Įgyvendinta veikianti "Tic Tac Toe" žaidimo programa su rezultatų lentele.
-- Sėkmingai naudoti OOP principai ir projektavimo šablonai.
-- Įgyvendintos failo operacijos, skirtos išsaugoti ir įkelti rezultatų lenteles duomenis.
+- **Results**:
+  - Implemented a functional Tic Tac Toe game with scoreboard tracking.
+  - Used OOP principles and design patterns effectively.
+  - Implemented file operations to save and load scoreboard data.
 
-**Išvados**:
+- **Conclusions**:
+  - The program successfully demonstrates the use of OOP principles and design patterns.
+  - Future extensions could include adding more sophisticated AI players, adding multiplayer options over network, or improving the user interface.
 
-Programa sėkmingai demonstruoja OOP principų ir projektavimo šablonų naudojimą.
-Galimos ateities plėtros galimybės apima sudėtingesnių AI žaidėjų pridėjimą, daugybinio žaidimo variantų įvedimą per tinklą arba gerinant vartotojo sąsają.
-  
-**Ateities Perspektyvos**:
+- **Future Prospects**:
+  - The program could be extended to support more players, additional game modes, or alternative board sizes.
+  - Improvements in error handling, game statistics, and user interface could enhance the player experience.
 
-Programą galima plėtoti, kad ji palaikytų daugiau žaidėjų, papildomus žaidimo režimus ar alternatyvias lentos dydžio parinktis.
-Klaidų tvarkymo, žaidimo statistikos ir vartotojo sąsajos tobulinimas galėtų pagerinti žaidėjo patirtį.
+## References
 
-### Nuorodos
-
-- Python dokumentacija
-- Projektavimo šablonai: Elements of Reusable Object-Oriented Software
-- Stack Overflow ir įvairios internetinės forumų platformos klaidų šalinimui ir vadovavimui
-
-Ši ataskaita sėkmingai demonstruoja funkcionalaus "Tic Tac Toe" žaidimo įgyvendinimą naudojant Python, efektyviai panaudojant OOP principus, projektavimo šablonus ir failo operacijas. Programa suteikia tvirtą pagrindą būsimoms plėtros ir plečiamumo galimybėms.
+- Python Documentation
+- Design Patterns: Elements of Reusable Object-Oriented Software
+- Stack Overflow and various online forums for troubleshooting and guidance
