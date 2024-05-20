@@ -138,6 +138,7 @@
   - Implemented a functional Tic Tac Toe game with scoreboard tracking.
   - Used OOP principles and design patterns effectively.
   - Implemented file operations to save and load scoreboard data.
+  - Attempted to implement unit tests to cover core functionality of the game, but encountered issues with the testing code.
 
 - **Conclusions**:
   - The program successfully demonstrates the use of OOP principles and design patterns.
